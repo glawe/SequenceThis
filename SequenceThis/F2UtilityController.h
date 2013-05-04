@@ -9,6 +9,8 @@
 #ifndef __SequenceThis__F2UtilityController__
 #define __SequenceThis__F2UtilityController__
 
+#include "WProgram.h"
+
 class F2UtilityController
 {
 private:

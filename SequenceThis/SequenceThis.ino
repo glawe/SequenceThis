@@ -70,6 +70,9 @@
 #include "F2SequencerStep.h"
 #include "F2UtilityController.h"
 
+#define CHANGE_HEAP_SIZE(size)  __asm__ volatile ("\t.globl _min_heap_size\n\t.equ _min_heap_size, " #size "\n")
+CHANGE_HEAP_SIZE(65536);
+
 void editButtonsCallback(byte selection);
 void stepButtonsCallback(byte buttonNumber);
 void playStopButtonCallBack();
@@ -102,8 +105,8 @@ void update()
 
 void setup()
 {
-    Serial.begin(31250);
-    //Serial.begin(9600);
+    //Serial.begin(31250);
+    Serial.begin(9600);
     _selectedEditPart = 0;
     Wire.begin();
     F2UtilityController::sharedInstance();
@@ -188,6 +191,7 @@ void stepButtonsCallback(byte buttonNumber)
 
 void rotaryCallbackUp()
 {
+    Serial.print("Up");
     switch (_selectedEditPart)
     {
         case 0:
@@ -203,6 +207,7 @@ void rotaryCallbackUp()
 
 void rotaryCallbackDown()
 {
+    Serial.print("down");
     switch (_selectedEditPart)
     {
         case 0:

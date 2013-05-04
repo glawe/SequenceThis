@@ -9,8 +9,8 @@
 #ifndef __SequenceThis__F2SequenceController__
 #define __SequenceThis__F2SequenceController__
 
+#include "WProgram.h"
 #include "F2SequencePattern.h"
-#include "Arduino.h"
 
 #define MAX_NUMBER_OF_PATTERNS 16
 

@@ -9,7 +9,7 @@
 #ifndef __SequenceThis__F2SequencerStep__
 #define __SequenceThis__F2SequencerStep__
 
-#include "Arduino.h"
+#include "WProgram.h"
 
 class F2SequencerStep
 {

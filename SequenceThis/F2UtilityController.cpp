@@ -30,7 +30,10 @@ F2UtilityController::~F2UtilityController()
 
 int F2UtilityController::getAvailableMemory()
 {
+    return 1000;
+    /*
     extern int __heap_start, *__brkval;
     int v;
     return (int) &v - (__brkval == 0 ? (int) &__heap_start : (int) __brkval);
+    */
 }

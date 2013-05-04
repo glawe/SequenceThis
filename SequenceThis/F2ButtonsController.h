@@ -9,7 +9,7 @@
 #ifndef __SequenceThis__F2ButtonsController__
 #define __SequenceThis__F2ButtonsController__
 
-#include "Arduino.h"
+#include "WProgram.h"
 #include "Wire.h"
 
 class F2ButtonsController

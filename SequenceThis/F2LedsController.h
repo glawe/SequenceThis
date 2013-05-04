@@ -9,7 +9,7 @@
 #ifndef __SequenceThis__F2LedsController__
 #define __SequenceThis__F2LedsController__
 
-#include "Arduino.h"
+#include "WProgram.h"
 #include "Wire.h"
 
 class F2LedsController

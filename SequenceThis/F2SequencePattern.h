@@ -9,7 +9,7 @@
 #ifndef __SequenceThis__F2SequencePattern__
 #define __SequenceThis__F2SequencePattern__
 
-#include "Arduino.h"
+#include "WProgram.h"
 #include "F2SequencerStep.h"
 
 #define MAX_NUMBER_OF_STEPS 16

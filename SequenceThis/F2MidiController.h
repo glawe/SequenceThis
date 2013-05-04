@@ -9,7 +9,7 @@
 #ifndef __SequenceThis__F2MidiController__
 #define __SequenceThis__F2MidiController__
 
-#include "Arduino.h"
+#include "WProgram.h"
 
 class F2MidiController
 {

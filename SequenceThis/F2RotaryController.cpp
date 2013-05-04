@@ -14,7 +14,7 @@ byte _encoderPin2;
 volatile long _encoderValue;
 unsigned char _encoderPin1Value;
 unsigned char _encoderPin2Value;
-unsigned char _encoderPreviousValue=0;
+unsigned char _encoderPreviousValue = 0;
 const byte _stepAmount = 1;
 
 F2RotaryController* F2RotaryController::sharedInstance()
@@ -23,6 +23,57 @@ F2RotaryController* F2RotaryController::sharedInstance()
         _sharedInstance = new F2RotaryController();
     return _sharedInstance;
 }
+
+int oldnumber;
+volatile int number;                    // used in both interrupt routines
+volatile boolean halfleft = false;      // Used in both interrupt routines
+volatile boolean halfright = false;     // Used in both interrupt routines
+
+void isr_A()
+{                                           // A went LOW
+    delay(3);                                             // Debounce time
+    // Trade off bounce vs missed counts
+    int bits = PORTB;                                     // Atomic read of encoder inputs
+    int LSB = (bits >> 2) & 0x01;
+    int MSB = (bits >> 4) & 0x01;
+    
+    if(LSB == LOW)
+    {                              		// A still LOW ?
+        if(MSB == HIGH && halfright == false)
+        {     		// -->
+            halfright = true;                                 // One half click clockwise
+        }
+        if(MSB == LOW && halfleft == true)
+        {        		// <--
+            halfleft = false;                                 // One whole click counter-
+            number--;                                         // clockwise
+        }
+    }
+    Serial.print(number);
+}
+void isr_B()
+{                                           // B went LOW
+    delay(3);                                             // Debounce time
+    // Trade off bounce vs missed counts
+    int bits = PORTB;                                     // Atomic read of encoder inputs
+    int LSB = (bits >> 2) & 0x01;
+    int MSB = (bits >> 4) & 0x01;
+    
+    if(MSB == LOW)
+    {                              		// A still LOW ?
+        if(LSB == HIGH && halfleft == false)
+        {     		// <--
+            halfleft = true;                                  // One half  click counter-
+        }                                                   // clockwise
+        if(LSB == LOW && halfright == true)
+        {       		// -->
+            halfright = false;                                // One whole click clockwise
+            number++;
+        }
+    }
+    Serial.print(number);
+}
+
 
 F2RotaryController::F2RotaryController()
 {
@@ -36,8 +87,15 @@ F2RotaryController::F2RotaryController()
     digitalWrite(_encoderPin1, HIGH);
     digitalWrite(_encoderPin2, HIGH);
     
-    attachInterrupt(0, updateEncoder, CHANGE);
-    attachInterrupt(1, updateEncoder, CHANGE);
+    //attachInterrupt(0, updateEncoder, CHANGE);
+    //attachInterrupt(1, updateEncoder, CHANGE);
+
+    attachInterrupt(0, isr_A, FALLING);   		// Call isr_2 when digital pin 2 goes LOW
+    attachInterrupt(1, isr_B, FALLING);          // Call isr_3 when digital pin 3 goes LOW
+    
+    //attachInterrupt(0, updateEncoder, FALLING);
+    //attachInterrupt(1, updateEncoder, RISING);
+
 }
 
 F2RotaryController::~F2RotaryController()

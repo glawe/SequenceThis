@@ -10,7 +10,7 @@
 #define __SequenceThis__F2DisplayController__
 
 #include <LiquidCrystal.h>
-#include "Arduino.h"
+#include "WProgram.h"
 #include "F2UtilityController.h"
 #include "F2SequencerStep.h"
 #include "F2SequenceController.h"

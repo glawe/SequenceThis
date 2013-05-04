@@ -141,7 +141,7 @@ void F2DisplayController::update()
             _lcd->setCursor(10, 0);
             _lcd->write(byte(2));
             _lcd->setCursor(11, 0);
-            _lcd->print("   ");
+            //_lcd->print("   ");
             _lcd->setCursor(11, 0);
             _lcd->print(editVelocity);
             break;

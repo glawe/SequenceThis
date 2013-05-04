@@ -23,7 +23,7 @@ F2ButtonsController::F2ButtonsController()
 {
     //0x27 Step Leddar
     Wire.beginTransmission(LED_BUTTONS_CHIP_ADDRESS);
-    Wire.write(0x13);
+    Wire.send(0x13);
 }
 
 F2ButtonsController::~F2ButtonsController()
@@ -35,10 +35,10 @@ void F2ButtonsController::update()
 {
     byte inputs=0;
     Wire.beginTransmission(LED_BUTTONS_CHIP_ADDRESS);
-    Wire.write(0x12);
+    Wire.send(0x12);
     Wire.endTransmission();
     Wire.requestFrom(LED_BUTTONS_CHIP_ADDRESS, 1); 
-    inputs = Wire.read();
+    inputs = Wire.receive();
     switch (inputs)
     {
         case 1:     //Button 1
@@ -71,10 +71,10 @@ void F2ButtonsController::update()
     
     inputs=0;
     Wire.beginTransmission(LED_BUTTONS_CHIP_ADDRESS);
-    Wire.write(0x13);
+    Wire.send(0x13);
     Wire.endTransmission();
     Wire.requestFrom(LED_BUTTONS_CHIP_ADDRESS, 1);
-    inputs = Wire.read();
+    inputs = Wire.receive();
     switch (inputs)
     {
         case 1:     //Button 9
@@ -107,10 +107,10 @@ void F2ButtonsController::update()
     
     inputs = 0;
     Wire.beginTransmission(UTL_BUTTONS_CHIP_ADDRESS);
-    Wire.write(0x13); 
+    Wire.send(0x13);
     Wire.endTransmission();
     Wire.requestFrom(UTL_BUTTONS_CHIP_ADDRESS, 1);
-    inputs = Wire.read();
+    inputs = Wire.receive();
     switch (inputs)
     {
         case 1:     //Button 1

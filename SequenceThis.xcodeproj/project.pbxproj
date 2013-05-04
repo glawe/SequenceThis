@@ -1978,7 +1978,7 @@
 /* Begin XCBuildConfiguration section */
 		3569362A171DC34E00C57A5E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 356935F5171DC34E00C57A5E /* Arduino mega2560.xcconfig */;
+			baseConfigurationReference = 356935F9171DC34E00C57A5E /* chipKIT Uno32.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
